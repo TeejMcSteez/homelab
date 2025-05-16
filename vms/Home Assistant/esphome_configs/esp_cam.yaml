@@ -5,18 +5,18 @@ esp32:
   board: esp-wrover-kit
 
 wifi:
-  ssid: "World Wide Web"
-  password: "ablecapital114"
+  ssid: "SSID"
+  password: "PWD"
 
 logger:
 
 api:
   encryption:
-    key: "Q9RVQNzulu09iT44px+aSz8gVBbN7Z3G5F2Z0hEdox4="
+    key: "KEY"
 
 ota:
   platform: "esphome"
-  password: "Intel11900k"
+  password: "PWD"
 
 # Camera module config for the OV2640 on the ESP32-CAM board
 esp32_camera:
