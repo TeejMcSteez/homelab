@@ -12,20 +12,20 @@ logger:
 # Enable Home Assistant API
 api:
   encryption:
-    key: "y/l0FVnztArtPXj/QhH8mfIES1Z+JhvQaXbj4rVM4f4="
+    key: "KEY"
 
 ota:
   - platform: esphome
-    password: "Intel11900k"
+    password: "PWD"
 
 wifi:
-  ssid: "World Wide Web"
-  password: "ablecapital114"
+  ssid: "SSID"
+  password: "PWD"
 
   # Enable fallback hotspot (captive portal) in case wifi connection fails
   ap:
     ssid: "Tempsensor Fallback Hotspot"
-    password: "5L5rb1Ir9ZrL"
+    password: "PWD"
 
 captive_portal:
 
