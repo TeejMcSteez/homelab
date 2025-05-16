@@ -1,0 +1,40 @@
+esphome:
+  name: tempsensor
+
+esp32:
+  board: esp32dev
+  framework:
+    type: arduino
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+  encryption:
+    key: "y/l0FVnztArtPXj/QhH8mfIES1Z+JhvQaXbj4rVM4f4="
+
+ota:
+  - platform: esphome
+    password: "Intel11900k"
+
+wifi:
+  ssid: "World Wide Web"
+  password: "ablecapital114"
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Tempsensor Fallback Hotspot"
+    password: "5L5rb1Ir9ZrL"
+
+captive_portal:
+
+sensor:
+  - platform: dht
+    pin: 33
+    temperature:
+      name: "Room Temp"
+    humidity:
+      name: "Room Humidity"
+    model: DHT11
+    update_interval: 60s
