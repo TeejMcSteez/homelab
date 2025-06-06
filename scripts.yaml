@@ -1,0 +1,243 @@
+ellie_log_food:
+  alias: "Log Food for Ellie"
+  sequence:
+    - choose:
+        - conditions:
+            - condition: state
+              entity_id: input_select.ellie_food_item
+              state: "Frozen Morsels (1 Cup)"
+          sequence:
+            - service: input_number.set_value
+              target:
+                entity_id: input_number.ellie_calories
+              data:
+                value: "{{ states('input_number.ellie_calories')|float + 182 }}"
+            - service: input_number.set_value
+              target:
+                entity_id: input_number.ellie_protein
+              data:
+                value: "{{ states('input_number.ellie_protein')|float + 12 }}"
+            - service: input_number.set_value
+              target:
+                entity_id: input_number.ellie_fat
+              data:
+                value: "{{ states('input_number.ellie_fat')|float + 8 }}"
+            - service: input_number.set_value
+              target:
+                entity_id: input_number.ellie_fiber
+              data:
+                value: "{{ states('input_number.ellie_fiber')|float + 3 }}"
+
+        - conditions:
+            - condition: state
+              entity_id: input_select.ellie_food_item
+              state: "Kibble (1 Cup)"
+          sequence:
+            - service: input_number.set_value
+              target:
+                entity_id: input_number.ellie_calories
+              data:
+                value: "{{ states('input_number.ellie_calories')|float + 365 }}"
+            - service: input_number.set_value
+              target:
+                entity_id: input_number.ellie_protein
+              data:
+                value: "{{ states('input_number.ellie_protein')|float + 25 }}"
+            - service: input_number.set_value
+              target:
+                entity_id: input_number.ellie_fat
+              data:
+                value: "{{ states('input_number.ellie_fat')|float + 13 }}"
+            - service: input_number.set_value
+              target:
+                entity_id: input_number.ellie_fiber
+              data:
+                value: "{{ states('input_number.ellie_fiber')|float + 5.5 }}"
+
+        - conditions:
+            - condition: state
+              entity_id: input_select.ellie_food_item
+              state: "Peanut Butter (1 tbsp)"
+          sequence:
+            - service: input_number.set_value
+              target:
+                entity_id: input_number.ellie_calories
+              data:
+                value: "{{ states('input_number.ellie_calories')|float + 94 }}"
+            - service: input_number.set_value
+              target:
+                entity_id: input_number.ellie_protein
+              data:
+                value: "{{ states('input_number.ellie_protein')|float + 4 }}"
+            - service: input_number.set_value
+              target:
+                entity_id: input_number.ellie_fat
+              data:
+                value: "{{ states('input_number.ellie_fat')|float + 8 }}"
+            - service: input_number.set_value
+              target:
+                entity_id: input_number.ellie_fiber
+              data:
+                value: "{{ states('input_number.ellie_fiber')|float + 1 }}"
+
+        - conditions:
+            - condition: state
+              entity_id: input_select.ellie_food_item
+              state: "Multivitamin Chew (1 chew)"
+          sequence:
+            - service: input_number.set_value
+              target:
+                entity_id: input_number.ellie_calories
+              data:
+                value: "{{ states('input_number.ellie_calories')|float + 10.5 }}"
+            - service: input_number.set_value
+              target:
+                entity_id: input_number.ellie_protein
+              data:
+                value: "{{ states('input_number.ellie_protein')|float + 7 }}"
+            - service: input_number.set_value
+              target:
+                entity_id: input_number.ellie_fat
+              data:
+                value: "{{ states('input_number.ellie_fat')|float + 4.5 }}"
+            - service: input_number.set_value
+              target:
+                entity_id: input_number.ellie_fiber
+              data:
+                value: "{{ states('input_number.ellie_fiber')|float + 2 }}"
+
+        - conditions:
+            - condition: state
+              entity_id: input_select.ellie_food_item
+              state: "Jerky Chews (1 Chew)"
+          sequence:
+            - service: input_number.set_value
+              target:
+                entity_id: input_number.ellie_calories
+              data:
+                value: "{{ states('input_number.ellie_calories')|float + 46 }}"
+            - service: input_number.set_value
+              target:
+                entity_id: input_number.ellie_protein
+              data:
+                value: "{{ states('input_number.ellie_protein')|float + 10.74 }}"
+            - service: input_number.set_value
+              target:
+                entity_id: input_number.ellie_fat
+              data:
+                value: "{{ states('input_number.ellie_fat')|float + 1 }}"
+            - service: input_number.set_value
+              target:
+                entity_id: input_number.ellie_fiber
+              data:
+                value: "{{ states('input_number.ellie_fiber')|float + 4 }}"
+
+        - conditions:
+            - condition: state
+              entity_id: input_select.ellie_food_item
+              state: "Salmon Oil (1 tsp)"
+          sequence:
+            - service: input_number.set_value
+              target:
+                entity_id: input_number.ellie_calories
+              data:
+                value: "{{ states('input_number.ellie_calories')|float + 38 }}"
+            - service: input_number.set_value
+              target:
+                entity_id: input_number.ellie_protein
+              data:
+                value: "{{ states('input_number.ellie_protein')|float + 0 }}"
+            - service: input_number.set_value
+              target:
+                entity_id: input_number.ellie_fat
+              data:
+                value: "{{ states('input_number.ellie_fat')|float + 9.5 }}"
+            - service: input_number.set_value
+              target:
+                entity_id: input_number.ellie_fiber
+              data:
+                value: "{{ states('input_number.ellie_fiber')|float + 0 }}"
+        
+        - conditions:
+            - condition: state
+              entity_id: input_select.ellie_food_item
+              state: "Blue Buffalo Bits (1 small treat)"
+          sequence:
+            - service: input_number.set_value
+              target:
+                entity_id: input_number.ellie_calories
+              data:
+                value: "{{ states('input_number.ellie_calories')|float + 4 }}"
+            - service: input_number.set_value
+              target:
+                entity_id: input_number.ellie_protein
+              data:
+                value: "{{ states('input_number.ellie_protein')|float + 1 }}"
+            - service: input_number.set_value
+              target:
+                entity_id: input_number.ellie_fat
+              data:
+                value: "{{ states('input_number.ellie_fat')|float + 0 }}"
+            - service: input_number.set_value
+              target:
+                entity_id: input_number.ellie_fiber
+              data:
+                value: "{{ states('input_number.ellie_fiber')|float + 1 }}"
+    
+      default:
+        - service: persistent_notification.create
+          data:
+            title: "Food Not Tracked"
+            message: "This food item is not in the tracker."
+ellie_log_custom_food:
+  alias: "Log Custom Food for Ellie"
+  sequence:
+    - service: input_number.set_value
+      target:
+        entity_id: input_number.ellie_calories
+      data:
+        value: >
+          {{
+            states('input_number.ellie_calories') | float(0) +
+            states('input_text.ellie_custom_calories') | float(0)
+          }}
+
+    - service: input_number.set_value
+      target:
+        entity_id: input_number.ellie_protein
+      data:
+        value: >
+          {{
+            states('input_number.ellie_protein') | float(0) +
+            states('input_text.ellie_custom_protein') | float(0)
+          }}
+
+    - service: input_number.set_value
+      target:
+        entity_id: input_number.ellie_fat
+      data:
+        value: >
+          {{
+            states('input_number.ellie_fat') | float(0) +
+            states('input_text.ellie_custom_fat') | float(0)
+          }}
+
+    - service: input_number.set_value
+      target:
+        entity_id: input_number.ellie_fiber
+      data:
+        value: >
+          {{
+            states('input_number.ellie_fiber') | float(0) +
+            states('input_text.ellie_custom_fiber') | float(0)
+          }}
+
+    - service: persistent_notification.create
+      data:
+        title: "Custom Food Logged"
+        message: >
+          Added '{{ states('input_text.ellie_custom_food_name') }}' with
+          {{ states('input_text.ellie_custom_calories') | float(0) }} kcal,
+          {{ states('input_text.ellie_custom_protein') | float(0) }}g protein,
+          {{ states('input_text.ellie_custom_fat') | float(0) }}g fat,
+          {{ states('input_text.ellie_custom_fiber') | float(0) }}g fiber.

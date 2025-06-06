@@ -1,0 +1,256 @@
+- id: '1747337317547'
+  alias: Light Automation
+  description: When I get home turns bedroom lamp onto 25%
+  triggers:
+  - device_id: 9dd73789efc89eca2480e3f08742bf2e
+    domain: device_tracker
+    entity_id: 046f4fc2c770a4239b14b4b6f881f9e4
+    type: enters
+    trigger: device
+    zone: zone.home
+  conditions: []
+  actions:
+  - action: light.turn_on
+    metadata: {}
+    data:
+      rgb_color:
+      - 255
+      - 0
+      - 0
+      brightness_pct: 25
+    target:
+      device_id: 32f7f94880e465dec0c1259ebd70be24
+  mode: single
+- id: '1747337372923'
+  alias: Light Automation (off)
+  description: When I am not detected in the house turns off my bedroom lamp
+  triggers:
+  - device_id: 9dd73789efc89eca2480e3f08742bf2e
+    domain: device_tracker
+    entity_id: 046f4fc2c770a4239b14b4b6f881f9e4
+    type: leaves
+    trigger: device
+    zone: zone.home
+  conditions: []
+  actions:
+  - action: light.turn_off
+    metadata: {}
+    data: {}
+    target:
+      device_id: 32f7f94880e465dec0c1259ebd70be24
+  mode: single
+- id: '1747354644800'
+  alias: Living Room Light
+  description: Turns off the living room light in the daytime
+  triggers:
+  - trigger: time
+    at: 06:30:00
+  - trigger: sun
+    event: sunrise
+    offset: 0
+  conditions: []
+  actions:
+  - type: turn_off
+    device_id: 2e0d6ceef7e7f90fb1de0c481d34d84c
+    entity_id: bc1f1d5e996fd5ab1959d63eaa05153f
+    domain: light
+  mode: single
+- id: '1747354771276'
+  alias: Living Room (On)
+  description: When the sun sets turns on the living room lamp
+  triggers:
+  - trigger: sun
+    event: sunset
+    offset: 0
+  conditions: []
+  actions:
+  - type: turn_on
+    device_id: 2e0d6ceef7e7f90fb1de0c481d34d84c
+    entity_id: bc1f1d5e996fd5ab1959d63eaa05153f
+    domain: light
+    brightness_pct: 100
+  mode: single
+- id: '1748050576123'
+  alias: Power Off PC
+  description: When I am away turn off the PC to stop the power draw.
+  triggers:
+  - device_id: 9dd73789efc89eca2480e3f08742bf2e
+    domain: device_tracker
+    entity_id: 046f4fc2c770a4239b14b4b6f881f9e4
+    type: leaves
+    trigger: device
+    zone: zone.home
+  conditions: []
+  actions:
+  - action: switch.turn_off
+    metadata: {}
+    data: {}
+    target:
+      entity_id: switch.main_pc_switch_0
+  - action: input_boolean.toggle
+    metadata: {}
+    data: {}
+    target:
+      entity_id: input_boolean.home
+  mode: single
+- id: '1748050684568'
+  alias: Turns On PC
+  description: When I arrive home turns on PC power
+  triggers:
+  - device_id: 9dd73789efc89eca2480e3f08742bf2e
+    domain: device_tracker
+    entity_id: 046f4fc2c770a4239b14b4b6f881f9e4
+    type: enters
+    trigger: device
+    zone: zone.home
+  conditions: []
+  actions:
+  - action: switch.turn_on
+    metadata: {}
+    data: {}
+    target:
+      entity_id: switch.main_pc_switch_0
+  - action: input_boolean.toggle
+    metadata: {}
+    data: {}
+    target:
+      entity_id: input_boolean.home
+  mode: single
+- id: '1748051916833'
+  alias: Toggle Ring Feed on Motion
+  description: ''
+  triggers:
+  - trigger: state
+    entity_id:
+    - event.front_door_motion
+  conditions:
+  - condition: state
+    entity_id: input_boolean.home
+    state: 'on'
+  actions:
+  - action: input_boolean.toggle
+    metadata: {}
+    data: {}
+    target:
+      entity_id: input_boolean.show_ring_feed
+  - delay:
+      hours: 0
+      minutes: 1
+      seconds: 30
+      milliseconds: 0
+  - action: input_boolean.toggle
+    metadata: {}
+    data: {}
+    target:
+      entity_id: input_boolean.show_ring_feed
+  mode: single
+- id: '1748052645208'
+  alias: Show Lordt When Away
+  description: ''
+  triggers:
+  - trigger: state
+    entity_id:
+    - device_tracker.ellie_tracker
+    from: Lordts Castle
+    to: not_home
+  conditions: []
+  actions:
+  - action: input_boolean.toggle
+    metadata: {}
+    data: {}
+    target:
+      entity_id: input_boolean.show_lordt
+  mode: single
+- id: '1748052685711'
+  alias: Hide Lordt When Home
+  description: ''
+  triggers:
+  - trigger: state
+    entity_id:
+    - device_tracker.ellie_tracker
+    from: not_home
+    to: Lordts Castle
+  conditions: []
+  actions:
+  - action: input_boolean.toggle
+    metadata: {}
+    data: {}
+    target:
+      entity_id: input_boolean.show_lordt
+  mode: single
+- id: '1748664213675'
+  alias: Bedroom Temperature Notif.
+  description: If it is above 85 F or 55 F and above 65% humidity something is wrong
+    in the room and sends me a notification.
+  triggers: []
+  conditions:
+  - type: is_temperature
+    condition: device
+    device_id: 18f9e5c7aa1116214d55b3b0596019f0
+    entity_id: 2cb5e746d65d2570e97ee27b96b78d50
+    domain: sensor
+    metadata:
+      secondary: false
+    above: 75
+    below: 55
+  - type: is_humidity
+    condition: device
+    device_id: 18f9e5c7aa1116214d55b3b0596019f0
+    entity_id: a4c2f1886b8f277329c44f07f3a1473c
+    domain: sensor
+    above: 65
+  actions:
+  - action: notify.notify
+    metadata: {}
+    data:
+      message: The room is currently {{sensor.tempsensor_room_temp}} degree's and
+        {{sensor.tempsensor_room_humidity}}% humidity!
+      title: Bad Temperature Reading Detected
+  - action: notify.persistent_notification
+    metadata: {}
+    data:
+      message: The room is currently {{sensor.tempsensor_room_temp}} degree's and
+        {{sensor.tempsensor_room_humidity}}% humidity!
+      title: Bad Temperature Reading Detected
+  mode: single
+- id: '1748717533316'
+  alias: Low Battery Notif.
+  description: When the front door ring camera is below 25% it sends a notification
+    and creates a persistent notification.
+  triggers:
+  - type: battery_level
+    device_id: 8f813da0ad4e092b09b4cc89587e4845
+    entity_id: dcd9ec2980bfc2f6453d32f22bb74321
+    domain: sensor
+    trigger: device
+    below: 25
+  conditions: []
+  actions:
+  - action: notify.notify
+    metadata: {}
+    data:
+      message: Ring battery is low! Currently at {{sensor.front_door_battery}}%
+  - action: notify.persistent_notification
+    metadata: {}
+    data:
+      message: Ring battery is low! Currently at {{sensor.front_door_battery}}%
+  mode: single
+- id: '1748931122384'
+  alias: Wi-Fi Disconnect Alert
+  description: 'When the external IP isn’t available sends me a notification. '
+  triggers:
+  - trigger: state
+    entity_id:
+    - sensor.x25_external_ip
+    to: unavailable
+  - trigger: state
+    entity_id:
+    - sensor.x25_external_ip
+    to: unknown
+  conditions: []
+  actions:
+  - action: notify.send_message
+    metadata: {}
+    data:
+      message: No external IP detected Wi-Fi may be down!
+  mode: single

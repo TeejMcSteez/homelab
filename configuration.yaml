@@ -1,0 +1,88 @@
+
+# Loads default set of integrations. Do not remove.
+default_config:
+
+# Load frontend themes from the themes folder
+frontend:
+  themes: !include_dir_merge_named themes
+
+automation: !include automations.yaml
+script: !include scripts.yaml
+scene: !include scenes.yaml
+
+input_select:
+    ellie_food_item:
+        name: Food Item
+        options:
+            - Frozen Morsels (1 Cup)
+            - Kibble (1 Cup)
+            - Peanut Butter (1 tbsp)
+            - Multivitamin Chew (1 chew)
+            - Salmon Oil (1 tsp)
+            - Jerky Chews (1 Chew)
+            - Blue Buffalo Bits (1 small treat)
+            
+input_text:
+  ellie_custom_food_name:
+    name: Custom Food Name
+
+  ellie_custom_calories:
+    name: Custom Calories
+    pattern: '^[0-9]*$'  # only digits
+    max: 5  # max digits, e.g., "2000"
+
+  ellie_custom_protein:
+    name: Custom Protein
+    pattern: '^[0-9]*$'
+    max: 3
+
+  ellie_custom_fat:
+    name: Custom Fat
+    pattern: '^[0-9]*$'
+    max: 3
+
+  ellie_custom_fiber:
+    name: Custom Fiber
+    pattern: '^[0-9]*$'
+    max: 3
+
+# Old slider values
+# input_number:
+#   ellie_custom_calories:
+#     name: Custom Calories
+#     min: 0
+#     max: 2000
+#     step: 1
+#     unit_of_measurement: "kcal"
+
+#   ellie_custom_protein:
+#     name: Custom Protein
+#     min: 0
+#     max: 200
+#     step: 1
+#     unit_of_measurement: "g"
+
+#   ellie_custom_fat:
+#     name: Custom Fat
+#     min: 0
+#     max: 200
+#     step: 1
+#     unit_of_measurement: "g"
+
+#   ellie_custom_fiber:
+#     name: Custom Fiber
+#     min: 0
+#     max: 100
+#     step: 1
+#     unit_of_measurement: "g"
+
+template:
+  - sensor:
+      - name: "Ellie Net Calories"
+        unique_id: ellie_net_calories
+        unit_of_measurement: "kcal"
+        state: >
+          {% set intake = states('input_number.ellie_calories') | float(0) %}
+          {% set burned = states('sensor.ellie_calories_burned') | float(0) %}
+          {{ intake - burned }}
+
