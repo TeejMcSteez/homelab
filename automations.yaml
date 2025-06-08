@@ -254,3 +254,19 @@
     data:
       message: No external IP detected Wi-Fi may be down!
   mode: single
+- id: '1749360136945'
+  alias: Turn Camera On Door Open
+  description: When the door sensor senses the door is open it turns the camera on.
+  triggers:
+  - type: motion
+    device_id: e9f4a6bc308c604ea52477dd7f5ceb32
+    entity_id: 917022288961d5ebd4f95e54bdcaeffd
+    domain: binary_sensor
+    trigger: device
+  conditions: []
+  actions:
+  - type: turn_on
+    device_id: 19cd3731f6a8b4265a05ecd1820f8f31
+    entity_id: 6517f1faac32a91a75a63aeef992d388
+    domain: switch
+  mode: single
