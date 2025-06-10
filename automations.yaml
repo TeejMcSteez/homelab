@@ -257,13 +257,17 @@
 - id: '1749360136945'
   alias: Turn Camera On Door Open
   description: When the door sensor senses the door is open it turns the camera on.
+    Only when I am away.
   triggers:
   - type: motion
     device_id: e9f4a6bc308c604ea52477dd7f5ceb32
     entity_id: 917022288961d5ebd4f95e54bdcaeffd
     domain: binary_sensor
     trigger: device
-  conditions: []
+  conditions:
+  - condition: state
+    entity_id: device_tracker.tommys_iphone
+    state: not_home
   actions:
   - type: turn_on
     device_id: 19cd3731f6a8b4265a05ecd1820f8f31

@@ -1,0 +1,39 @@
+- id: '1749521223472'
+  name: Wake Up
+  entities:
+    switch.main_pc_switch_0:
+      friendly_name: Main PC Switch
+      state: 'on'
+    light.bedroom_lamp:
+      min_color_temp_kelvin: 2000
+      max_color_temp_kelvin: 6535
+      min_mireds: 153
+      max_mireds: 500
+      effect_list:
+      - 'off'
+      - colorloop
+      supported_color_modes:
+      - color_temp
+      - xy
+      effect: 'off'
+      color_mode: xy
+      brightness: 153
+      color_temp_kelvin:
+      color_temp:
+      hs_color:
+      - 10.118
+      - 100
+      rgb_color:
+      - 255
+      - 43
+      - 0
+      xy_color:
+      - 0.691493
+      - 0.308293
+      off_with_transition: false
+      off_brightness:
+      friendly_name: Bedroom Lamp
+      supported_features: 44
+      state: 'on'
+  icon: mdi:sun-clock
+  metadata: {}
