@@ -123,10 +123,7 @@
   - trigger: state
     entity_id:
     - event.front_door_motion
-  conditions:
-  - condition: state
-    entity_id: input_boolean.home
-    state: 'on'
+  conditions: []
   actions:
   - action: input_boolean.toggle
     metadata: {}
@@ -235,42 +232,35 @@
     data:
       message: Ring battery is low! Currently at {{sensor.front_door_battery}}%
   mode: single
-- id: '1748931122384'
-  alias: Wi-Fi Disconnect Alert
-  description: 'When the external IP isn’t available sends me a notification. '
+- id: '1750736557572'
+  alias: Turn Off Bedroom Cam
+  description: When I arrive home, it turns off the camera in my bedroom.
   triggers:
-  - trigger: state
-    entity_id:
-    - sensor.x25_external_ip
-    to: unavailable
-  - trigger: state
-    entity_id:
-    - sensor.x25_external_ip
-    to: unknown
+  - trigger: zone
+    entity_id: device_tracker.tommys_iphone
+    zone: zone.home
+    event: enter
   conditions: []
   actions:
-  - action: notify.send_message
+  - action: camera.turn_off
     metadata: {}
-    data:
-      message: No external IP detected Wi-Fi may be down!
+    data: {}
+    target:
+      device_id: 19cd3731f6a8b4265a05ecd1820f8f31
   mode: single
-- id: '1749360136945'
-  alias: Turn Camera On Door Open
-  description: When the door sensor senses the door is open it turns the camera on.
-    Only when I am away.
+- id: '1750736625679'
+  alias: Turn On Bedroom Cam
+  description: When I leave the house turns on my bedroom camera
   triggers:
-  - type: motion
-    device_id: e9f4a6bc308c604ea52477dd7f5ceb32
-    entity_id: 917022288961d5ebd4f95e54bdcaeffd
-    domain: binary_sensor
-    trigger: device
-  conditions:
-  - condition: state
+  - trigger: zone
     entity_id: device_tracker.tommys_iphone
-    state: not_home
+    zone: zone.home
+    event: leave
+  conditions: []
   actions:
-  - type: turn_on
-    device_id: 19cd3731f6a8b4265a05ecd1820f8f31
-    entity_id: 6517f1faac32a91a75a63aeef992d388
-    domain: switch
+  - action: camera.turn_on
+    metadata: {}
+    data: {}
+    target:
+      device_id: 19cd3731f6a8b4265a05ecd1820f8f31
   mode: single
